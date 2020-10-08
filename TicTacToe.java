@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class TicTacToe {
+	static final int TAILS = 0;
+	static final int HEADS = 1;
+	static final String USER = "USER";
+	static final String COMPUTER = "COMPUTER";
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -9,9 +13,10 @@ public class TicTacToe {
 		char userInput = scanner.next().charAt(0);
 		char input = chooseLetter(userInput);
 		showBoard();
-		desiredLocation(board); 
-    	freeOrNot(board);
+		desiredLocation(board , input); 
+    	freeOrNot(board , input);
     	makeMove(input,board);
+    	whoPlaysFirst();
 	}
 
 	/**
@@ -57,10 +62,10 @@ public class TicTacToe {
      */
     public static int desiredLocation(char board[] ,char input) {
     	int index = 1 ,flag = 0;
+    	System.out.println("Enter the index from 1 to  9 to make the move :");
+    	int index1 = scanner.nextInt();
     	while(index!=10)
     	{
-    		System.out.println("Enter the index from 1 to  9 to make the move :");
-        	int index1 = scanner.nextInt();
     		if(board[index]  == ' ' && index == index1)
     		{
     			makeMove( input , board);
@@ -68,6 +73,7 @@ public class TicTacToe {
     		}
     		if(flag ==1 )
     			break;
+    		index++;
     	}
     	return index;
     }
@@ -90,6 +96,25 @@ public class TicTacToe {
     	int position = desiredLocation(board , input);
     	if(freeOrNot(board , input))
     		board[position] = input;
-    		
+    		showBoard();
     }
+    /**
+     * UC6
+     * @return
+     */
+    public static String whoPlaysFirst() {
+    	int outcome =(int)( Math.floor(Math.random() * 10) % 2);
+    	if(outcome == TAILS)
+    	{
+    		System.out.println("Its tails!! User moves first.");
+    		return USER;
+    	}
+    	else
+    	{
+    		System.out.println("Its tails!! User moves first.");
+    		return COMPUTER;
+    	}
+    }
+    
+    
 }
