@@ -1,22 +1,44 @@
+import java.util.Scanner;
 
 public class TicTacToe {
-	 static char board[]= new char[10];  
 	public static void main(String[] args) {
-		printBoard();
-		assignEmptyBoard();
+		createBoard();
+		System.out.println("Enter letter X or O");
+		Scanner scanner = new Scanner(System.in);
+		char userInput = scanner.next().charAt(0);
+		chooseLetter(userInput);
+		showBoard();
+	} 
+	/**
+	 * UC1
+	 * @return
+	 */
+	public static char[] createBoard() {
+		 char board[]= new char[10]; 
+		 for(int space =1; space<=9 ; space++)
+			 board[space] = ' ';
+	     return board;
 	}
-	public static void printBoard() {
-	System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
-	System.out.println("|-----------|");
-	System.out.println("| " + board[3] + " | " + board[4] + " | " + board[5] + " |");
-	System.out.println("|-----------|");
-	System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
-	}
-	static void assignEmptyBoard()
-	{
-		for(int a =0 ; a<9 ; a++) 
+    /**
+     * UC2
+     * @param letter
+     */
+    static void chooseLetter(char userInput)
 		{
-			board[a+1] = ' ' ;
+			if(userInput == 'X')
+			{
+			System.out.println("Player has chosen " + userInput + " and Computer has letter O");
+			}
+			else
+			System.out.println("Player has chosen " + userInput + " and Computer has letter X");
 		}
+    public static void showBoard() {
+    	char board[]=createBoard();
+		System.out.println("| " + board[1] + " | " + board[2] + " | " + board[3] + " |");
+		System.out.println("|-----------|");
+		System.out.println("| " + board[4] + " | " + board[5] + " | " + board[6] + " |");
+		System.out.println("|-----------|");
+		System.out.println("| " + board[7] + " | " + board[8] + " | " + board[9] + " |");
 	}
+    
 }
