@@ -1,13 +1,10 @@
 import java.util.Scanner;
 
-public class TicTacToe 
+public class TicTacToe {
 	public static void main(String[] args) {
 		createBoard();
-		assignEmptyBoard();
-		chooseLetter();
-		
-	}
-     
+		chooseLetter();	
+	} 
 	/**
 	 * UC1
 	 * @return
@@ -18,18 +15,12 @@ public class TicTacToe
 			 board[space] = ' ';
 	     return board;
 	}
-	public static void assignEmptyBoard()
-	{
-		for(int a =0 ; a<9 ; a++) 
-		{
-			board[a+1] = ' ' ;
-		}
-	}
+	
 	static void chooseLetter()
 	{
 		System.out.println("Enter letter X or O");
-		Scanner sc = new Scanner(System.in);
-		char letter = sc.next().charAt(0);
+		Scanner scanner = new Scanner(System.in);
+		char letter = scanner.next().charAt(0);
 		if(letter == 'X')
 		{
 		System.out.println("Player has chosen " + letter + " and Computer has letter O");
