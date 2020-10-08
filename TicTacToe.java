@@ -4,14 +4,14 @@ public class TicTacToe {
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		createBoard();
+		char board[] =createBoard();
 		System.out.println("Enter letter X or O");
 		char userInput = scanner.next().charAt(0);
 		char input = chooseLetter(userInput);
 		showBoard();
-		
-    	desiredLocation(); 
-    	freeOrNot();
+		desiredLocation(board); 
+    	freeOrNot(board);
+    	makeMove(input,board);
 	}
 
 	/**
@@ -55,15 +55,15 @@ public class TicTacToe {
      * @param position
      * @return
      */
-    public static int desiredLocation() {
-    	char board[]=createBoard();
+    public static int desiredLocation(char board[] ,char input) {
     	int index = 1 ,flag = 0;
-    	while(index<10)
+    	while(index!=10)
     	{
     		System.out.println("Enter the index from 1 to  9 to make the move :");
         	int index1 = scanner.nextInt();
     		if(board[index]  == ' ' && index == index1)
     		{
+    			makeMove( input , board);
     			flag = 1;
     		}
     		if(flag ==1 )
@@ -75,13 +75,21 @@ public class TicTacToe {
      * UC4
      * @return
      */
-    public static boolean freeOrNot() {
-    	int position = desiredLocation();
-    	char board[]=createBoard();
+    public static boolean freeOrNot(char board[] ,char input) {
+    	int position = desiredLocation(board , input);
     	if(board[position]== ' ')
     	return true;
     	else
     	return false;
     	}
-    
+    /**
+     * UC5
+     * @param input
+     */
+    public static void makeMove(char input ,char board[]) {
+    	int position = desiredLocation(board , input);
+    	if(freeOrNot(board , input))
+    		board[position] = input;
+    		
+    }
 }
