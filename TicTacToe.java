@@ -7,6 +7,7 @@ public class TicTacToe {
 		Scanner scanner = new Scanner(System.in);
 		char userInput = scanner.next().charAt(0);
 		chooseLetter(userInput);
+		showBoard();
 	} 
 	/**
 	 * UC1
@@ -31,5 +32,16 @@ public class TicTacToe {
 			else
 			System.out.println("Player has chosen " + userInput + " and Computer has letter X");
 		}
-
+    /**
+     * UC3
+     * 
+     */
+    public static void showBoard() {
+    	char board[]=createBoard();
+		System.out.println("| " + board[1] + " | " + board[2] + " | " + board[3] + " |");
+		System.out.println("|-----------|");
+		System.out.println("| " + board[4] + " | " + board[5] + " | " + board[6] + " |");
+		System.out.println("|-----------|");
+		System.out.println("| " + board[7] + " | " + board[8] + " | " + board[9] + " |");
+	}
 }
