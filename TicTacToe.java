@@ -1,22 +1,41 @@
+import java.util.Scanner;
 
-public class TicTacToe {
-	 static char board[]= new char[10];  
+public class TicTacToe 
 	public static void main(String[] args) {
-		printBoard();
+		createBoard();
 		assignEmptyBoard();
+		chooseLetter();
+		
 	}
-	public static void printBoard() {
-	System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
-	System.out.println("|-----------|");
-	System.out.println("| " + board[3] + " | " + board[4] + " | " + board[5] + " |");
-	System.out.println("|-----------|");
-	System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
+     
+	/**
+	 * UC1
+	 * @return
+	 */
+	public static char[] createBoard() {
+		 char board[]= new char[10]; 
+		 for(int space =0; space<10 ; space++)
+			 board[space] = ' ';
+	     return board;
 	}
-	static void assignEmptyBoard()
+	public static void assignEmptyBoard()
 	{
 		for(int a =0 ; a<9 ; a++) 
 		{
 			board[a+1] = ' ' ;
 		}
 	}
+	static void chooseLetter()
+	{
+		System.out.println("Enter letter X or O");
+		Scanner sc = new Scanner(System.in);
+		char letter = sc.next().charAt(0);
+		if(letter == 'X')
+		{
+		System.out.println("Player has chosen " + letter + " and Computer has letter O");
+		}
+		else
+		System.out.println("Player has chosen " + letter + " and Computer has letter X");
+	}
+	
 }
