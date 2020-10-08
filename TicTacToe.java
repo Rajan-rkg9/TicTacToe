@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class TicTacToe {
 	public static void main(String[] args) {
-		createBoard();
-		chooseLetter();	
+		createBoard();	
 	} 
 	/**
 	 * UC1
@@ -16,17 +15,6 @@ public class TicTacToe {
 	     return board;
 	}
 	
-	static void chooseLetter()
-	{
-		System.out.println("Enter letter X or O");
-		Scanner scanner = new Scanner(System.in);
-		char letter = scanner.next().charAt(0);
-		if(letter == 'X')
-		{
-		System.out.println("Player has chosen " + letter + " and Computer has letter O");
-		}
-		else
-		System.out.println("Player has chosen " + letter + " and Computer has letter X");
-	}
+	
 	
 }
