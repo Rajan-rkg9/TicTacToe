@@ -2,15 +2,18 @@ import java.util.Scanner;
 
 public class TicTacToe {
 	static Scanner scanner = new Scanner(System.in);
-
+	static final int TAILS = 0;
+	static final int HEADS = 1;
+	static final String USER = "USER";
+	static final String COMPUTER = "COMPUTER";
 	public static void main(String[] args) {
 		char board[] =createBoard();
 		System.out.println("Enter letter X or O");
 		char userInput = scanner.next().charAt(0);
 		char input = chooseLetter(userInput);
 		showBoard();
-		desiredLocation(board); 
-    	freeOrNot(board);
+		desiredLocation(board , input); 
+    	freeOrNot(board , input);
     	makeMove(input,board);
 	}
 
@@ -86,10 +89,11 @@ public class TicTacToe {
      * UC5
      * @param input
      */
-    public static void makeMove(char input ,char board[]) {
+    public static char[] makeMove(char input ,char board[]) {
     	int position = desiredLocation(board , input);
     	if(freeOrNot(board , input))
     		board[position] = input;
-    		
+    		return board;
     }
+    
 }
