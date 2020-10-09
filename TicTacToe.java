@@ -162,5 +162,23 @@ public class TicTacToe {
  		else
  			return "TURN";
     }
+    /**
+	 * UC8
+	 * @return
+	 */
+	public static int getIndexForSuccessfulMove(char[] board, char letter) {
+		int index;
+		for (index = 1; index <= 9; index++) {
+			char[] dummyBoard = board;
+			if (dummyBoard[index] == ' ') {
+				dummyBoard[index] = letter;
+				String status = determineWin(dummyBoard, letter);
+				if (status.equals("WIN"))
+					return index;
+			} else
+				continue;
+		}
+		return 0;
+	}
     
 }
