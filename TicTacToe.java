@@ -222,7 +222,19 @@ public class TicTacToe {
 			board = makeMove(computerLetter , board);
 			return board;
 		}
-		return board;
+		if (checkPositionAvailable(board, computerLetter)) {
+			board = makeMove(computerLetter , board);
+			return board;
+		} else {
+			for (int side = 2; side <= 8; side++) {
+				if (checkPositionAvailable(board, computerLetter)) {
+					board = makeMove(computerLetter , board);
+					break;
+				}
+				side++;
+			}
+			return board;
+		}
 	}
 
 	public static int findCorner(char board[]) {
