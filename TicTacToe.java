@@ -202,4 +202,40 @@ public class TicTacToe {
 		}
 		return 0;
 	}
+	/**
+	 *UC10
+	 * @return
+	 */
+	public static char[] checkComputerTurn(char board[], char computerLetter) {
+		int index = getIndexForSuccessfulMove(board, computerLetter);
+		if (index != 0) {
+			board = makeMove(computerLetter , board);
+			return board;
+		}
+		index = getIndexToBlockMove(board, computerLetter);
+		if (index != 0) {
+			board = makeMove(computerLetter , board);
+			return board;
+		}
+		index = findCorner(board);
+		if (index != 0) {
+			board = makeMove(computerLetter , board);
+			return board;
+		}
+		return board;
+	}
+
+	public static int findCorner(char board[]) {
+
+		if (board[1] == ' ')
+			return 1;
+		if (board[3] == ' ')
+			return 3;
+		if (board[7] == ' ')
+			return 7;
+		if (board[9] == ' ')
+			return 9;
+		else
+			return 0;
+	}
 }
