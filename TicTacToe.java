@@ -9,14 +9,31 @@ public class TicTacToe {
 
 	public static void main(String[] args) {
 		char board[] =createBoard();
+		char computerLetter;
 		System.out.println("Enter letter X or O");
-		char userInput = scanner.next().charAt(0);
-		char input = chooseLetter(userInput);
-		showBoard();
-		desiredLocation(board , input); 
-    	freeOrNot(board , input);
-    	makeMove(input,board);
-    	whoPlaysFirst();
+		char userLetter = scanner.next().charAt(0);
+		if(userLetter == 'X')
+			computerLetter='O';
+		else
+			computerLetter = 'X';
+		chooseLetter(userLetter);    	
+		String firstPlayer = whoPlaysFirst();
+		if(firstPlayer.equals(USER)) 
+		{
+			showBoard(board);
+			int position = desiredLocation(board , userLetter); 
+	    	checkPositionAvailable(board , userLetter);
+	    	board = makeMove(userLetter,board);
+	    	determineWin(board, userLetter);
+		}
+		else
+		{
+			showBoard(board);
+			int position = desiredLocation(board , computerLetter); 
+	    	checkPositionAvailable(board , computerLetter);
+	    	board = makeMove(computerLetter,board);
+	    	determineWin(board, computerLetter);
+		}
 	}
 
 	/**
@@ -33,22 +50,22 @@ public class TicTacToe {
      * UC2
      * @param letter
      */
-    public static char chooseLetter(char userInput)
+    public static char chooseLetter(char userLetter)
 		{
-			if(userInput == 'X')
+			if(userLetter == 'X')
 			{
-			System.out.println("Player has chosen " + userInput + " and Computer has letter O");
+			System.out.println("Player has chosen " + userLetter + " and Computer has letter O");
 			}
 			else
-			System.out.println("Player has chosen " + userInput + " and Computer has letter X");
-			return userInput;
+			System.out.println("Player has chosen " + userLetter + " and Computer has letter X");
+			return userLetter;
 		}
     /**
      * UC3
+     * @param board 
      * 
      */
-    public static void showBoard() {
-    	char board[]=createBoard();
+    public static void showBoard(char[] board) {
 		System.out.println("| " + board[1] + " | " + board[2] + " | " + board[3] + " |");
 		System.out.println("|-----------|");
 		System.out.println("| " + board[4] + " | " + board[5] + " | " + board[6] + " |");
@@ -60,7 +77,7 @@ public class TicTacToe {
      * @param position
      * @return
      */
-    public static int desiredLocation(char board[] ,char input) {
+    public static int desiredLocation(char board[] ,char userLetter) {
     	int index = 1 ,flag = 0;
     	System.out.println("Enter the index from 1 to  9 to make the move :");
     	int index1 = scanner.nextInt();
@@ -68,7 +85,7 @@ public class TicTacToe {
     	{
     		if(board[index]  == ' ' && index == index1)
     		{
-    			makeMove( input , board);
+    			makeMove( userLetter , board);
     			flag = 1;
     		}
     		if(flag ==1 )
@@ -81,8 +98,8 @@ public class TicTacToe {
      * UC4
      * @return
      */
-    public static boolean freeOrNot(char board[] ,char input) {
-    	int position = desiredLocation(board , input);
+    public static boolean checkPositionAvailable(char board[] ,char userLetter) {
+    	int position = desiredLocation(board , userLetter);
     	if(board[position]== ' ')
     	return true;
     	else
@@ -90,13 +107,14 @@ public class TicTacToe {
     	}
     /**
      * UC5
-     * @param input
+     * @param userLetter
      */
-    public static void makeMove(char input ,char board[]) {
-    	int position = desiredLocation(board , input);
-    	if(freeOrNot(board , input))
-    		board[position] = input;
-    		showBoard();
+    public static char[] makeMove(char userLetter ,char board[]) {
+    	int position = desiredLocation(board , userLetter);
+    	if(checkPositionAvailable(board , userLetter))
+    		board[position] = userLetter;
+    		showBoard(board);
+    		return board;
     }
     /**
      * UC6
@@ -115,6 +133,34 @@ public class TicTacToe {
     		return COMPUTER;
     	}
     }
-    
+    /**
+     * UC7
+     * @param board
+     * @param userLetter
+     * @return
+     */
+    public static String determineWin(char board[] , char userLetter) {
+    	int index;
+    	
+    	 if((board[1] == userLetter && board[2] == userLetter && board[3] == userLetter)||
+    	   (board[4] == userLetter && board[5] == userLetter && board[6] == userLetter)||
+    	   (board[7] == userLetter && board[8] == userLetter && board[9] == userLetter)||
+    	   (board[1] == userLetter && board[4] == userLetter && board[7] == userLetter)||
+    	   (board[2] == userLetter && board[5] == userLetter && board[8] == userLetter)||
+    	   (board[3] == userLetter && board[6] == userLetter && board[9] == userLetter)||
+    	   (board[1] == userLetter && board[5] == userLetter && board[9] == userLetter)||
+    	   (board[3] == userLetter && board[5] == userLetter && board[9] == userLetter))
+    	 return "WIN";
+    	 for (index =1 ; index <= 9; index++) {
+ 			if (board[index] != ' ')
+ 				continue;
+ 			else
+ 				break;
+ 		}
+ 		if (index == 9)
+ 			return "TIE";
+ 		else
+ 			return "TURN";
+    }
     
 }
