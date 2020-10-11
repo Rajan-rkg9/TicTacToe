@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class TicTacToe {
 	static final int TAILS = 0;
 	static final int HEADS = 1;
@@ -12,28 +13,52 @@ public class TicTacToe {
 		char computerLetter;
 		System.out.println("Enter letter X or O");
 		char userLetter = scanner.next().charAt(0);
+		int movePosition = 0;
+		int maxTurns = 9;
 		if(userLetter == 'X')
 			computerLetter='O';
 		else
 			computerLetter = 'X';
 		chooseLetter(userLetter);    	
 		String firstPlayer = whoPlaysFirst();
-		if(firstPlayer.equals(USER)) 
+		
+		//UC12
+		String winner = "";
+		while(maxTurns >0)
 		{
-			showBoard(board);
-			int position = desiredLocation(board , userLetter); 
-	    	checkPositionAvailable(board , userLetter);
-	    	board = makeMove(userLetter,board);
-	    	determineWin(board, userLetter);
+			maxTurns--;
+			if(firstPlayer.equals(USER)) 
+			{
+				showBoard(board);
+			    movePosition = desiredLocation(board , userLetter); 
+		    	checkPositionAvailable(board , userLetter);
+		    	board = makeMove(userLetter,board);
+		    	if(determineWin(board, userLetter).equals("WIN"))
+		    		{
+		    		winner = USER;
+		    		break;
+		    		}
+		    	firstPlayer = COMPUTER;
+			}
+			else
+			{
+				showBoard(board);
+		    	board = makeMove(computerLetter,board);
+		    	if(determineWin(board, computerLetter).equals("WIN"))
+		    	{
+		    		winner = COMPUTER;
+		    		break;
+		    	}
+		    	firstPlayer = COMPUTER;
+			}
 		}
+		
+		if(winner.equals(COMPUTER))
+			System.out.println("Computer Won");
+		else if(winner.equals(USER))
+			System.out.println("User Won");
 		else
-		{
-			showBoard(board);
-			int position = desiredLocation(board , computerLetter); 
-	    	checkPositionAvailable(board , computerLetter);
-	    	board = makeMove(computerLetter,board);
-	    	determineWin(board, computerLetter);
-		}
+			System.out.println("Game Drawn!!");
 	}
 
 	/**
