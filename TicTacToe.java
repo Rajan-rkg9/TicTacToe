@@ -7,8 +7,16 @@ public class TicTacToe {
 	static final String USER = "USER";
 	static final String COMPUTER = "COMPUTER";
 	static Scanner scanner = new Scanner(System.in);
-
+	
 	public static void main(String[] args) {
+		char choice;
+		do {
+			startNewGame(scanner);
+			System.out.println("Want to play More !!  (y/n) ");
+			choice = scanner.next().charAt(0);
+		} while (choice == 'y');
+	}
+	public static void startNewGame(Scanner scanner) {
 		char board[] =createBoard();
 		char computerLetter;
 		System.out.println("Enter letter X or O");
